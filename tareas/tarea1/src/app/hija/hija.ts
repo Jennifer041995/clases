@@ -4,7 +4,7 @@ import { MadreComponent } from "../madre/madre";
 @Component({
   selector: 'app-hija',
   standalone: true,
-  imports: [MadreComponent],
+  imports: [],
   templateUrl: './hija.html',
   styleUrls: ['./hija.css']
 })
