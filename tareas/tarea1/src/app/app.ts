@@ -1,12 +1,33 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+
+import { MadreComponent } from './madre/madre';
+import { HijaComponent } from './hija/hija';
+import { Nieto } from './nieto/nieto';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [MadreComponent, HijaComponent, Nieto],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
-  protected readonly title = signal('tarea1');
+  title(): string {
+    return 'tarea1';
+  }
+  madre: string = "Norma";
+  madreApellido: string = "Salinas";
+  madreEdad: number = 50;
+  hija: string = "Jennifer";
+  hijaApellido: string = "Salinas";
+  hijaEdad: number = 30;
+  nietaNombre: string = "Aruna";
+  nietaApellido: string = "Salinas";
+  nietaEdad: number = 0;
+  datosCompletos(): string {
+    return `El nombre de la madre es: ${this.madre} ${this.madreApellido}, de edad de: ${this.madreEdad}
+    \nEl nombre de la hija es: ${this.hija} ${this.hijaApellido}, de edad de: ${this.hijaEdad}
+    \nEl nombre de la nieta es: ${this.nietaNombre} ${this.nietaApellido}, de edad de: ${this.nietaEdad}`;
+  }
 }

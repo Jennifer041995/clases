@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+	background-color: #f3e9ff;
+}
+
+.purple {
+	font-size: 12px;
+	font-weight: bold;
+	color: #4B0082;
+	background-color: #e0d7f5;
+	padding: 8px;
+	border-radius: 6px;
+}
+
