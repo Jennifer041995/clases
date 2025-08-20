@@ -1,0 +1,6 @@
+<p>Nombre del empleado: {{ nombre }}</p>
+<p>Apellido del empleado: {{ apellido }}</p>
+<p>Edad del empleado: {{ (edad >17) ? 'Mayor de edad' : 'Menor de edad' }}</p>
+Introduce la empresa:<input type="text" #empresa (keyup)="0">
+<!--<button (click)="llamar_empresa(empresa.value)">Cambiar</button>-->
+<p>Empresa: {{ empresa.value}}</p>
