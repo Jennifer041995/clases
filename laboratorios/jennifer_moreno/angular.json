@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "laboratorios": {
+    "jennifer_moreno": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -23,12 +23,7 @@
             ],
             "styles": [
               "src/styles.css"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -58,10 +53,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "laboratorios:build:production"
+              "buildTarget": "jennifer_moreno:build:production"
             },
             "development": {
-              "buildTarget": "laboratorios:build:development"
+              "buildTarget": "jennifer_moreno:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,6 +83,6 @@
     }
   },
   "cli": {
-    "analytics": "d7342d8a-d3ba-49d6-a476-719f631c3955"
+    "analytics": "38b48fea-d2d5-4c13-9160-8dd512d7834e"
   }
 }
