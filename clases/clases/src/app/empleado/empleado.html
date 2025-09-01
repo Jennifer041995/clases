@@ -1,13 +1,14 @@
 <p>Nombre del empleado: {{ nombre }}</p>
 <p>Apellido del empleado: {{ apellido }}</p>
-<p>Edad del empleado: {{ (edad >17) ? 'Mayor de edad' : 'Menor de edad' }}</p>
-Introduce la empresa:<input type="text" #empresa (keyup)="0" [disabled] = 
-"habilitar_input_property">
+<p>Edad del empleado: {{ (edad > 17) ? "Mayor de edad" : "Menor de edad" }}</p>
+<!--Introduce la empresa: <input type="text" #empresa (keyup)="0" [disabled] = "habilitar_input_property">-->
 <!--<button (click)="llamar_empresa(empresa.value)">Cambiar</button>-->
-<p>Empresa: {{ empresa.value}}</p>
-
-Registrado: <input type="checkbox" id="registro" [checked]=
-"usuario_registrado_property" (click)="set_usuario_registrado()">
+Introduce empresa: <input type="text" [(ngModel)]="empresa"><br>
+<p>Empresa: {{ empresa }}</p>
+<!--Registrado: <input type="checkbox" id="registro" [checked] = "usuario_registrado_property" (click)="cambiar_registro()">-->
+Registrado: <input type="radio" name="n_registro" id="n_registro" value="si" [checked]="usuario_registrado_property" (click)="set_usuario_registrado($event)"><br>
+No registrado: <input type="radio" name="n_registro" value="no" (click)="set_usuario_registrado($event)">
 <p>{{ texto_registro }}</p>
-
-<!--cambiar_registro()-->
+<button (click)="presionar()">Haz click aqui</button><br>
+dato: <input type="text" (input)="cambiar_desde_input($event)"><br>
+dato recolectado: {{ dato }}
