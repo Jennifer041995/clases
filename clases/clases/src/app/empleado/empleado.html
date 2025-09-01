@@ -1,6 +1,13 @@
 <p>Nombre del empleado: {{ nombre }}</p>
 <p>Apellido del empleado: {{ apellido }}</p>
 <p>Edad del empleado: {{ (edad >17) ? 'Mayor de edad' : 'Menor de edad' }}</p>
-Introduce la empresa:<input type="text" #empresa (keyup)="0">
+Introduce la empresa:<input type="text" #empresa (keyup)="0" [disabled] = 
+"habilitar_input_property">
 <!--<button (click)="llamar_empresa(empresa.value)">Cambiar</button>-->
 <p>Empresa: {{ empresa.value}}</p>
+
+Registrado: <input type="checkbox" id="registro" [checked]=
+"usuario_registrado_property" (click)="set_usuario_registrado()">
+<p>{{ texto_registro }}</p>
+
+<!--cambiar_registro()-->
