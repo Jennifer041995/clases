@@ -11,4 +11,17 @@ No registrado: <input type="radio" name="n_registro" value="no" (click)="set_usu
 <p>{{ texto_registro }}</p>
 <button (click)="presionar()">Haz click aqui</button><br>
 dato: <input type="text" (input)="cambiar_desde_input($event)"><br>
-dato recolectado: {{ dato }}
+dato recolectado: {{ dato }} <br>
+
+<button [style]="color" (click)="lanzar_mensaje()">
+    Mostrar mensaje
+</button> <br>
+
+<label for="">
+    <input type="checkbox" [(ngModel)]="estadoCheckbox">Marca/ Desmarcar
+</label>
+<p>
+    <!--<operador ternario un input>-->
+        <!--<Booleano>-->
+    Estado del checkbox: {{ estadoCheckbox ? 'Marcado' : 'No marcado' }}
+</p>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-empleado',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './empleado.html',
   styleUrl: './empleado.css'
 })
@@ -15,6 +16,10 @@ export class Empleado {
   usuario_registrado_property = false;
   texto_registro = "No hay nadie registrado";
   dato = "";
+  color ="background-color: red;";
+  mensaje = "";
+  estadoCheckbox: boolean = false;
+
 
   constructor(){}
 
@@ -61,4 +66,12 @@ export class Empleado {
   cambiar_empresa(event: Event){
     this.empresa = (<HTMLInputElement>event.target).value;
   }
+
+  lanzar_mensaje(){
+    this.mensaje = "Mensaje lanzado";
+    //let mensaje = "Hola;"
+    alert(this.mensaje);
+    this.color = "background-color: green;";
+  }
+
 }
