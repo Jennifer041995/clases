@@ -1,0 +1,16 @@
+<div [style.backgroundColor]="color" style="padding: 20px; color: black;">
+  Fondo de color: {{ color }}
+</div>
+
+
+
+<div style="margin-top: 10px;">
+  <label>
+    <input type="radio" name="color" value="green" [(ngModel)]="color" />
+    Verde
+  </label>
+  <label style="margin-left: 10px;">
+    <input type="radio" name="color" value="yellow" [(ngModel)]="color" />
+    Amarillo
+  </label>
+</div>
