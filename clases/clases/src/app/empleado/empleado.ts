@@ -19,7 +19,13 @@ export class Empleado {
   color ="background-color: red;";
   mensaje = "";
   estadoCheckbox: boolean = false;
-
+  n1: number = 0;
+  n2: number = 0;
+  operador: string = "+";
+  resultado: number = 0;
+  color_boton = "background: blue; color: white";
+  color_div = "background: red; color: white";
+  estado_juego: string = "";
 
   constructor(){}
 
@@ -72,6 +78,26 @@ export class Empleado {
     //let mensaje = "Hola;"
     alert(this.mensaje);
     this.color = "background-color: green;";
+  }
+
+operar(){
+    if(this.operador != ""){
+      this.resultado = eval(this.n1 + this.operador + this.n2);
+    }else{
+      this.resultado = 0;
+    }
+  }
+
+  cambiar_color(){
+    this.color_boton = "background-color: red; color: white";
+  }
+
+  restablecer_color(){
+    this.color_boton = "background-color: blue; color: white";
+  }
+
+  cambiar_estado(event: Event){
+    this.estado_juego = "El juego se ha " + (<HTMLInputElement>event.target).value;
   }
 
 }

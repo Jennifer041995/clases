@@ -25,3 +25,22 @@ dato recolectado: {{ dato }} <br>
         <!--<Booleano>-->
     Estado del checkbox: {{ estadoCheckbox ? 'Marcado' : 'No marcado' }}
 </p>
+
+<br>
+<h5>Ejercicio 1</h5>
+<input type="number" [(ngModel)]="n1" (keyup)="operar()"><br>
+<input type="text" [(ngModel)]="operador" (keyup)="operar()"><br>
+<input type="number" [(ngModel)]="n2" (keyup)="operar()"><br>
+<p>{{resultado}}</p>
+<h5>Ejercicio 2</h5>
+<button [style]="color_boton" (click)="cambiar_color()">Cambiar</button><br>
+<button (click)="restablecer_color()">Reestablecer</button><br>
+<div [style]="color_div">
+    HOLA EMILIO
+</div><br>
+<h5>Ejercicio 3</h5>
+<button (click)="cambiar_estado($event)" value="iniciado">Iniciar juego</button><br>
+<button (click)="cambiar_estado($event)" value="pausado">Pausar juego</button><br>
+<button (click)="cambiar_estado($event)" value="finalizado">Finalizar juego</button><br>
+<p>{{ estado_juego }}</p>
+<input type="color">
