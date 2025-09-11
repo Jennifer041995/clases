@@ -82,7 +82,7 @@ export class Empleado {
 
 operar(){
     if(this.operador != ""){
-      this.resultado = eval(this.n1 + this.operador + this.n2);
+      //this.resultado = eval(this.n1 + this.operador + this.n2);
     }else{
       this.resultado = 0;
     }
