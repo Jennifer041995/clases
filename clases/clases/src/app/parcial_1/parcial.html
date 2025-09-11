@@ -1,0 +1,8 @@
+
+<div>
+    <label for="colorInput">Escribir color</label>
+    <input type="text" id="colorInput" [(ngModel)]="color" placeholder="blue">
+</div>
+<div [style.backgriund]="color">
+    {{color}}
+</div>
