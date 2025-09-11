@@ -9,6 +9,6 @@ import { NgModule } from '@angular/core';
   templateUrl: './parcial_1.html',
   styleUrls: ['./parcial_1.css']
 })
-export class Parcial1Component {
+export class Parcial1 {
   color: string = 'red';
 }
