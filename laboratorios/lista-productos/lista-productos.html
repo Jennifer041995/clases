@@ -1,0 +1,5 @@
+<ul style="list-style: none;">
+  <li *ngFor="let producto of productos">
+  {{ producto.nombre }} - <span [ngStyle]="{color: producto.stock <= 5 ? 'red' : 'inherit', fontWeight: producto.stock <= 5 ? 'bold' : 'normal'}">{{ producto.stock }}</span>
+  </li>
+</ul>

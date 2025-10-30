@@ -1,0 +1,19 @@
+<form (ngSubmit)="calcularImpuestos()">
+  <div>
+    <label for="nombreProducto">Nombre del Producto:</label>
+    <input id="nombreProducto" [(ngModel)]="nombreProducto" name="nombreProducto">
+  </div>
+  <div>
+    <label for="precioBase">Precio Base:</label>
+    <input id="precioBase" type="number" [(ngModel)]="precioBase" name="precioBase">
+  </div>
+  <div>
+    <label for="categoria">Categoría:</label>
+    <select id="categoria" [(ngModel)]="categoria" name="categoria">
+      <option value="electrónica">Electrónica</option>
+      <option value="alimentos">Alimentos</option>
+      <option value="libros">Libros</option> 
+    </select>
+  </div>
+  <button type="submit">Calcular</button>
+</form>
