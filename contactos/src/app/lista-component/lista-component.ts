@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Contactos } from '../contactos.model';
-import { ContactosService } from '../crud_contactos.service';
+import { ServiceContactos } from '../contactos.service';
 
 @Component({
   selector: 'app-lista-component',
@@ -16,14 +16,14 @@ export class ListaComponent implements OnInit {
   contactosFiltrados: Contactos[] = [];
   filtroNombre: string = '';
    
-  constructor(private router: Router, private contactosService: ContactosService) {}
+  constructor(private router: Router, private ServiceContactos: ServiceContactos) {}
 
   ngOnInit(): void {
-    this.contactosService.obtener_contactos_db().subscribe(
+    this.ServiceContactos.obtener_contactos_db().subscribe(
       (contactos: any) => {
         if (contactos) {
           let contactosArray: Contactos[] = Object.values(contactos);
-          this.contactosService.set_contactos(contactosArray);
+          this.ServiceContactos.set_contactos(contactosArray);
           this.contactos = contactosArray;
           this.contactosFiltrados = contactosArray;
         } else {
@@ -53,9 +53,18 @@ export class ListaComponent implements OnInit {
 
   eliminarContacto(indice: number) {
     if (confirm('¿Estás seguro de que quieres eliminar este contacto?')) {
-      this.contactosService.eliminar_contacto(indice);
-      this.contactos = this.contactosService.obtener_contactos();
-      this.filtrarContactos();
+      this.ServiceContactos.eliminar_contacto(indice);
+      this.ServiceContactos.obtener_contactos().subscribe(
+        (contactos: Contactos[]) => {
+          this.contactos = contactos;
+          this.filtrarContactos();
+        },
+        error => {
+          console.error('Error al obtener contactos tras eliminar:', error);
+          this.contactos = [];
+          this.contactosFiltrados = [];
+        }
+      );
     }
   }
 

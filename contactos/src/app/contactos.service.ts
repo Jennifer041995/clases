@@ -1,17 +1,21 @@
 import { Injectable } from "@angular/core";
 import { Contactos } from "./contactos.model";
 import { DataService } from "./data.services";
-import { ServicioContacto } from "./servicio-contactos";
+import { Observable, of } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class ContactosService {
-  contactos: Contactos[] = [];
-
-  constructor(private dataService: DataService, private servicioMensaje: ServicioContacto) {
+export class ServiceContactos {
+  constructor(private dataService: DataService, private servicioMensaje: ServiceContactos) {
+    
   }
+
+  contactos: Contactos[] = [];
+    muestra_mensaje(mensaje: string){
+        console.log(mensaje);
+    }
 
   agregar_contacto(contacto: Contactos) {
     this.contactos.push(contacto);
@@ -20,10 +24,6 @@ export class ContactosService {
         console.log("Se han guardado los contactos: " + response);
         this.servicioMensaje.muestra_mensaje("Contacto agregado: " + contacto.nombre + " " + contacto.apellido);
       },
-      (error: string) => {
-        console.log("Error al guardar contactos: " + error);
-        this.servicioMensaje.muestra_mensaje("Error al agregar contacto: " + error);
-      }
     );
   }
 
@@ -31,8 +31,8 @@ export class ContactosService {
     return this.contactos.find(contacto => contacto.id === id);
   }
 
-  obtener_contactos() {
-    return this.contactos;
+  obtener_contactos(): Observable<Contactos[]> {
+    return of(this.contactos); 
   }
 
   encontrar_contacto(indice: number) {

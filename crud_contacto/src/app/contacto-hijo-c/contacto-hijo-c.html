@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div>
+                {{ (indice+1) }} - {{ contactoLista.nombre}} {{contactoLista.apellido}} {{ contactoLista.telefono}}
+                <a [routerLink]="['actualizar', indice]" [queryParams]="{accion: 1}">
+                    Actualizar
+                </a>
+                <a [routerLink]="['actualizar', indice]" [queryParams]="{accion: 2}">
+                    Eliminar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -26,6 +26,7 @@
     "@angular/forms": "^20.1.0",
     "@angular/platform-browser": "^20.1.0",
     "@angular/router": "^20.1.0",
+    "@angular/ssr": "^20.3.9",
     "bootstrap": "4.6",
     "jquery": "^3.7.1",
     "popper.js": "^1.16.1",
