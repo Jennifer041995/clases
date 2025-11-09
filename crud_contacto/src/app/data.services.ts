@@ -1,36 +1,38 @@
 import { Injectable } from "@angular/core";
-import { Contactos } from "./contactos.model";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Contactos } from "./contactos.model";
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class DataService {
-  constructor(private httpClient: HttpClient) { }
 
+  constructor(private httpClient: HttpClient) {}
+
+  // 🔹 Guardar contactos (PUT reemplaza el array completo en Firebase)
   guardar_contactos(contactos: Contactos[]) {
-     this.httpClient.post('https://crudcontactos-9d329-default-rtdb.firebaseio.com/datos.json', contactos).subscribe(
-       response => {
-          console.log("Se han guardado los empleados: " + response);
-      },
-        error => console.log("Error al guardar empleados: " + error)
+    this.httpClient
+      .put('https://prueba-641d7-default-rtdb.firebaseio.com/datos.json', contactos)
+      .subscribe(
+        response => console.log("Contactos guardados correctamente:", response),
+        error => console.log(" Error al guardar contactos:", error)
       );
   }
 
+  // 🔹 Cargar contactos (GET devuelve observable para que el componente o servicio se suscriba)
   cargar_contactos() {
-    return this.httpClient.get('https://crudcontactos-9d329-default-rtdb.firebaseio.com/datos.json', {
-      observe: 'body',
-      responseType: 'json'
-    });
+    return this.httpClient
+      .get<Contactos[]>('https://prueba-641d7-default-rtdb.firebaseio.com/datos.json');
   }
 
+  // 🔹 Actualizar contacto individual (PUT en la posición específica del arreglo)
   actualizar_contacto(indice: number, contacto: Contactos) {
-    let url = 'https://crudcontactos-9d329-default-rtdb.firebaseio.com/datos/' + indice + '.json';
-    return this.httpClient.put(url, contacto).subscribe(
-      response => console.log("Se ha actualizado el contacto: " + response),
-      error => console.log("Error al actualizar contacto: " + error)
-    );
+    const url = 'https://prueba-641d7-default-rtdb.firebaseio.com/datos/' + indice + '.json';
+    this.httpClient
+      .put(url, contacto)
+      .subscribe(
+        response => console.log('Contacto actualizado correctamente:', response),
+        error => console.log(' Error al actualizar contacto:', error)
+      );
   }
 }
