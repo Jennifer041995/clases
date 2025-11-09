@@ -41,6 +41,7 @@ export class ActualizarComponent implements OnInit {
     }
   }
 
+
   validarEmail(): boolean {
     // regex - es una secuencia de caracteres que define un patrón para buscar, validar, reemplazar o manipular texto.
     // /^[^\s@]+@[^\s@]+\.[^\s@]+$/ es una validación que un campo de texto tenga el formato de una dirección de correo electrónico.
