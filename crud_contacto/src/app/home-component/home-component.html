@@ -1,20 +1,24 @@
-<div class="container">
-  <div class="col">
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>{{titulo}}</h1>
+    <div>
+      <a routerLink="/lista" class="btn btn-primary me-2">Ver Lista Completa</a>
+      <a routerLink="/agregar" class="btn btn-success">Agregar Contacto</a>
+    </div>
   </div>
   <br>
   <form class="form-group row">
     <div class="form-group col-md-3">
       <label for="nombre"></label>
-      <input type="text" name="nombre" id="nombre" placeholder="nombre" class="form-control"[(ngModel)]="cuadroNombre">
+      <input type="text" name="nombre" id="nombre" placeholder="nombre" class="form-control" [(ngModel)]="cuadroNombre">
     </div>
     <div class="form-group col-md-3">
       <label for="apellido"></label>
-      <input type="text" name="apellido" id="apellido" placeholder="apellido" class="form-control"[(ngModel)]="cuadroApellido">
+      <input type="text" name="apellido" id="apellido" placeholder="apellido" class="form-control" [(ngModel)]="cuadroApellido">
     </div>
     <div class="form-group col-md-3">
       <label for="telefono"></label>
-      <input type="text" name="telefono" id="telefono" placeholder="telefono" class="form-control"[(ngModel)]="cuadroTelefono">
+      <input type="text" name="telefono" id="telefono" placeholder="telefono" class="form-control" [(ngModel)]="cuadroTelefono">
     </div>
     <div class="col">
       <button type="submit" class="btn btn-primary" (click)="agregar_contacto()" style="margin-top: 35px;">Guardar</button>

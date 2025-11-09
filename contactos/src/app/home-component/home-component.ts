@@ -15,7 +15,9 @@ export class HomeComponent implements OnInit{
   titulo = "Listado de contactos";
   cuadroNombre: string = "";
   cuadroApellido: string = "";
-  cuadroContactos: number = 0;
+  cuadroContactos: string = "";
+  cuadroEmail: string = "";
+  cuadroNota: string = "";
   contactos: Contactos[] = [];
 
   constructor(private ServiceContactos: ServiceContactos) {}
@@ -30,8 +32,23 @@ export class HomeComponent implements OnInit{
     );
   }
 
-  agregar_contacto(){
-    let miContacto = new Contactos ("", this.cuadroNombre, this.cuadroApellido, String(this.cuadroContactos));
-    this.ServiceContactos.agregar_contacto(miContacto)
+  agregar_contacto(event?: Event){
+    if(event) {
+      event.preventDefault();
+    }
+    if(this.cuadroNombre.trim() && this.cuadroApellido.trim() && this.cuadroContactos.trim()) {
+      let miContacto = new Contactos ("", this.cuadroNombre, this.cuadroApellido, this.cuadroContactos, this.cuadroEmail, this.cuadroNota);
+      this.ServiceContactos.agregar_contacto(miContacto);
+      this.contactos.push(miContacto);
+      this.limpiarFormulario();
+    }
+  }
+
+  limpiarFormulario() {
+    this.cuadroNombre = "";
+    this.cuadroApellido = "";
+    this.cuadroContactos = "";
+    this.cuadroEmail = "";
+    this.cuadroNota = "";
   }
 }

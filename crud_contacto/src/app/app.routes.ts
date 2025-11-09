@@ -6,5 +6,7 @@ import { ActualizarComponent } from './actualizar-component/actualizar-component
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'lista', component: ListaComponent },
+  { path: 'agregar', component: ContactoComponent },
   { path: 'actualizar/:id', component: ActualizarComponent },
 ];

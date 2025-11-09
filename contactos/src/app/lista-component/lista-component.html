@@ -1,10 +1,5 @@
 <div class="container mt-4">
   <h2>Lista de Contactos</h2>
-  <button class="btn btn-success mb-3" (click)="agregarContacto()">Agregar Contacto</button>
-  <button class="btn btn-secondary mb-3 ms-2" (click)="volverHome()">Volver al Inicio</button>
-  <div class="mb-3">
-    <input type="text" class="form-control" placeholder="Buscar por nombre o apellido" [(ngModel)]="filtroNombre" (input)="filtrarContactos()">
-  </div>
   <div class="row" *ngIf="contactosFiltrados.length > 0; else noContactos">
     <div class="col-md-6 mb-3" *ngFor="let contacto of contactosFiltrados; let i = index">
       <div class="card">

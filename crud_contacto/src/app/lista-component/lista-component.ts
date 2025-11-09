@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Contactos } from '../contactos.model';
-import { ContactosService } from '../crud_contactos.service';
+import { ServiceContactos } from '../crud_contactos.service';
+import { ServicioContacto } from '../servicio-contactos';
+import { filter, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-lista-component',
@@ -11,19 +13,39 @@ import { ContactosService } from '../crud_contactos.service';
   templateUrl: './lista-component.html',
   styleUrl: './lista-component.css',
 })
-export class ListaComponent implements OnInit {
+export class ListaComponent implements OnInit, OnDestroy {
   contactos: Contactos[] = [];
   contactosFiltrados: Contactos[] = [];
   filtroNombre: string = '';
+  private routerSubscription?: Subscription;
    
-  constructor(private router: Router, private contactosService: ContactosService) {}
+  constructor(private router: Router, private ServiceContactos: ServiceContactos, private servicioMensaje: ServicioContacto) {}
 
   ngOnInit(): void {
-    this.contactosService.obtener_contactos_db().subscribe(
+    this.cargarContactos();
+    
+    // Recargar contactos cuando se navega a esta ruta
+    this.routerSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      if (event.url === '/lista' || event.urlAfterRedirects === '/lista') {
+        this.cargarContactos();
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
+  }
+
+  cargarContactos(): void {
+    this.ServiceContactos.obtener_contactos_db().subscribe(
       (contactos: any) => {
         if (contactos) {
           let contactosArray: Contactos[] = Object.values(contactos);
-          this.contactosService.set_contactos(contactosArray);
+          this.ServiceContactos.set_contactos(contactosArray);
           this.contactos = contactosArray;
           this.contactosFiltrados = contactosArray;
         } else {
@@ -31,7 +53,7 @@ export class ListaComponent implements OnInit {
           this.contactosFiltrados = [];
         }
       },
-      error => {
+      (error: any) => {
         console.log("Error al cargar contactos: " + error);
         this.contactos = [];
         this.contactosFiltrados = [];
@@ -47,16 +69,20 @@ export class ListaComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  editarContacto(indice: number) {
-    this.router.navigate(['/actualizar', indice]);
+  editarContacto(id: string) {
+    this.router.navigate(['/actualizar', id]);
   }
 
-  eliminarContacto(indice: number) {
-    if (confirm('¿Estás seguro de que quieres eliminar este contacto?')) {
-      this.contactosService.eliminar_contacto(indice);
-      this.contactos = this.contactosService.obtener_contactos();
-      this.filtrarContactos();
-    }
+  eliminarContacto(id: string) {
+    this.servicioMensaje.confirmar('¿Estás seguro de que quieres eliminar este contacto?').then((confirmado) => {
+      if (confirmado) {
+        this.ServiceContactos.eliminar_contacto(parseInt(id));
+        // Recargar contactos desde Firebase después de eliminar
+        setTimeout(() => {
+          this.cargarContactos();
+        }, 500);
+      }
+    });
   }
 
   filtrarContactos() {

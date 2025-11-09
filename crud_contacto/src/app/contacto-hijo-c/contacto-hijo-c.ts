@@ -10,8 +10,15 @@ import { RouterModule } from '@angular/router';
   styleUrl: './contacto-hijo-c.css'
 })
 export class ContactoHijoC {
+array_contactos: any;
+agregar_contacto() {
+throw new Error('Method not implemented.');
+}
   @Input() contactoLista!: Contactos;
   @Input() indice!: number;
+  array_caracteristicas = [''];
 
-  constructor() {}
+  agregar_caracteristica(caracteristica: string){
+    this.array_caracteristicas.push(caracteristica);
+  }
 }

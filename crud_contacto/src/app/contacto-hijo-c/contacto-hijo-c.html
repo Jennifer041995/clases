@@ -3,10 +3,10 @@
         <div class="col">
             <div>
                 {{ (indice+1) }} - {{ contactoLista.nombre}} {{contactoLista.apellido}} {{ contactoLista.telefono}}
-                <a [routerLink]="['actualizar', indice]" [queryParams]="{accion: 1}">
+                <a [routerLink]="['/actualizar', contactoLista.id]" [queryParams]="{accion: 1}" class="btn btn-sm btn-primary ms-2">
                     Actualizar
                 </a>
-                <a [routerLink]="['actualizar', indice]" [queryParams]="{accion: 2}">
+                <a [routerLink]="['/actualizar', contactoLista.id]" [queryParams]="{accion: 2}" class="btn btn-sm btn-danger ms-2">
                     Eliminar
                 </a>
             </div>

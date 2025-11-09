@@ -10,21 +10,27 @@ import { Observable } from "rxjs";
 export class DataService {
   constructor(private httpClient: HttpClient) { }
 
-  guardar_contactos(contactos: Contactos[]): Observable<any> {
-    return this.httpClient.put('https://crudcontactos-9d329-default-rtdb.firebaseio.com/datos.json', contactos);
+  guardar_contactos(contactos: Contactos[]) {
+     this.httpClient.post('https://crudcontactos-9d329-default-rtdb.firebaseio.com/datos.json', contactos).subscribe(
+       response => {
+          console.log("Se han guardado los empleados: " + response);
+      },
+        error => console.log("Error al guardar empleados: " + error)
+      );
   }
 
-  cargar_contactos(): Observable<any> {
-    return this.httpClient.get('https://crudcontactos-9d329-default-rtdb.firebaseio.com/datos.json');
+  cargar_contactos() {
+    return this.httpClient.get('https://crudcontactos-9d329-default-rtdb.firebaseio.com/datos.json', {
+      observe: 'body',
+      responseType: 'json'
+    });
   }
 
-  actualizar_contacto(indice: number, contacto: Contactos): Observable<any> {
+  actualizar_contacto(indice: number, contacto: Contactos) {
     let url = 'https://crudcontactos-9d329-default-rtdb.firebaseio.com/datos/' + indice + '.json';
-    return this.httpClient.put(url, contacto);
-  }
-
-  eliminar_contacto(indice: number): Observable<any> {
-    let url = 'https://crudcontactos-9d329-default-rtdb.firebaseio.com/datos/' + indice + '.json';
-    return this.httpClient.delete(url);
+    return this.httpClient.put(url, contacto).subscribe(
+      response => console.log("Se ha actualizado el contacto: " + response),
+      error => console.log("Error al actualizar contacto: " + error)
+    );
   }
 }

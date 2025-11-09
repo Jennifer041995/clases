@@ -13,8 +13,8 @@
           <p class="card-text"><strong>Teléfono:</strong> {{ contacto.telefono }}</p>
           <p class="card-text" *ngIf="contacto.email"><strong>Email:</strong> {{ contacto.email }}</p>
           <p class="card-text" *ngIf="contacto.nota"><strong>Nota:</strong> {{ contacto.nota }}</p>
-          <button class="btn btn-primary me-2" (click)="editarContacto(i)">Editar</button>
-          <button class="btn btn-danger" (click)="eliminarContacto(i)">Eliminar</button>
+          <button class="btn btn-primary me-2" (click)="editarContacto(contacto.id)">Editar</button>
+          <button class="btn btn-danger" (click)="eliminarContacto(contacto.id)">Eliminar</button>
         </div>
       </div>
     </div>

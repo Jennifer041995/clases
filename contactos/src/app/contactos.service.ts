@@ -19,12 +19,8 @@ export class ServiceContactos {
 
   agregar_contacto(contacto: Contactos) {
     this.contactos.push(contacto);
-    this.dataService.guardar_contactos(this.contactos).subscribe(
-      response => {
-        console.log("Se han guardado los contactos: " + response);
-        this.servicioMensaje.muestra_mensaje("Contacto agregado: " + contacto.nombre + " " + contacto.apellido);
-      },
-    );
+    this.dataService.guardar_contactos(this.contactos)
+    this.servicioMensaje.muestra_mensaje("Contacto agregado: " + contacto.nombre + " " + contacto.apellido);
   }
 
   encontrar_contacto_por_id(id: string): Contactos | undefined {
@@ -48,30 +44,11 @@ export class ServiceContactos {
     contactoModificado.email = contacto.email;
     contactoModificado.nota = contacto.nota;
 
-    this.dataService.actualizar_contacto(indice, contacto).subscribe(
-      response => {
-        console.log("Se ha actualizado el contacto: " + response);
-        this.servicioMensaje.muestra_mensaje("Contacto actualizado: " + contacto.nombre + " " + contacto.apellido);
-      },
-      (error: string) => {
-        console.log("Error al actualizar contacto: " + error);
-        this.servicioMensaje.muestra_mensaje("Error al actualizar contacto: " + error);
-      }
-    );
+    this.dataService.actualizar_contacto(indice, contacto)
   }
 
   eliminar_contacto(indice: number) {
     this.contactos.splice(indice, 1);
-    this.dataService.guardar_contactos(this.contactos).subscribe(
-      response => {
-        console.log("Se han guardado los contactos después de eliminar: " + response);
-        this.servicioMensaje.muestra_mensaje("Contacto eliminado");
-      },
-      (error: string) => {
-        console.log("Error al guardar contactos después de eliminar: " + error);
-        this.servicioMensaje.muestra_mensaje("Error al eliminar contacto: " + error);
-      }
-    );
   }
 
   obtener_contactos_db() {
