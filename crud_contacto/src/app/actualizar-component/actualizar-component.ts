@@ -21,10 +21,10 @@ export class ActualizarComponent implements OnInit {
   ngOnInit(): void {
     this.contactoId = this.route.snapshot.params["id"];
     // Buscar contacto por ID
-    const contactoEncontrado = this.ServiceContactos.encontrar_contacto_por_id(this.contactoId);
+    /*const contactoEncontrado = this.ServiceContactos.encontrar_contacto_por_id(this.contactoId);
     if (contactoEncontrado) {
       this.contacto = { ...contactoEncontrado }; // Crear una copia para no modificar el original directamente
-    }
+    }*/
     this.accion = parseInt(this.route.snapshot.queryParams['accion']);
   }
 
@@ -34,14 +34,13 @@ export class ActualizarComponent implements OnInit {
       if (this.contacto.nombre.trim() && this.contacto.apellido.trim() && this.contacto.telefono.trim() && this.validarEmail()) {
         // Asegurar que el ID se mantenga
         this.contacto.id = this.contactoId;
-        this.ServiceContactos.actualizar_contacto_por_id(this.contacto);
         this.router.navigate(['/lista']);
       }
     } else {
-      this.ServiceContactos.eliminar_contacto_por_id(this.contactoId);
       this.router.navigate(['/lista']);
     }
   }
+
 
   validarEmail(): boolean {
     // regex - es una secuencia de caracteres que define un patrón para buscar, validar, reemplazar o manipular texto.
