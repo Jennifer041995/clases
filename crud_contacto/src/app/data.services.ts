@@ -10,7 +10,7 @@ export class DataService {
 
   constructor(private httpClient: HttpClient) {}
 
-  // 🔹 Guardar contactos (PUT reemplaza el array completo en Firebase)
+  // Guardar contactos (PUT reemplaza el array completo en Firebase)
   guardar_contactos(contactos: Contactos[]) {
     this.httpClient
       .put('https://crudcontact-315c3-default-rtdb.firebaseio.com/datos.json', contactos)
@@ -19,14 +19,14 @@ export class DataService {
         error => console.log(" Error al guardar contactos:", error)
       );
   }
-
-  // 🔹 Cargar contactos (GET devuelve observable para que el componente o servicio se suscriba)
+ 
+  // Carga de contactos (GET devuelve observable para que el componente o servicio se suscriba)
   cargar_contactos() {
     return this.httpClient
       .get<Contactos[]>('https://crudcontact-315c3-default-rtdb.firebaseio.com/datos.json');
   }
 
-  // 🔹 Actualizar contacto individual (PUT en la posición específica del arreglo)
+  // Actualiza el contacto individual (PUT en la posición específica del arreglo)
   actualizar_contacto(indice: number, contacto: Contactos) {
     const url = 'https://crudcontact-315c3-default-rtdb.firebaseio.com/datos/' + indice + '.json';
     this.httpClient

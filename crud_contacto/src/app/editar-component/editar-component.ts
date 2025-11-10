@@ -10,7 +10,7 @@ import { ServiceContactos } from '../crud_contactos.service';
   imports: [FormsModule, CommonModule],
   templateUrl: './editar-component.html',
   styleUrl: './editar-component.css'
-})
+}) 
 export class EditarComponent implements OnInit {
   indice: number = 0;
   contacto: Contactos = new Contactos("", "", "", "", "", "");
@@ -19,15 +19,15 @@ export class EditarComponent implements OnInit {
 
   ngOnInit(): void {
     this.indice = parseInt(this.route.snapshot.params["indice"]);
-    // Cargar el contacto por índice directamente del array local
+    // Carga el contacto por índice directamente del array local
     this.contacto = this.ServiceContactos.encontrar_contacto(this.indice);
   }
 
   editarContacto() {
     if (this.contacto.nombre.trim() && this.contacto.apellido.trim() && this.contacto.telefono.trim()) {
-      // Actualizar el contacto usando el índice
+      // Actualiza el contacto usando el índice
       this.ServiceContactos.actualizar_contacto(this.indice, this.contacto);
-      // Redirigir a la lista de contactos
+      // Redirige a la lista de contactos
       this.router.navigate(['/lista']);
     }
   }

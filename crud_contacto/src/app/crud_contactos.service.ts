@@ -41,12 +41,12 @@ export class ServiceContactos {
     );
   }
 
-  // Obtener contactos actuales
+  // Obtiene contactos actuales
   obtener_contactos(): Observable<Contactos[]> {
     return of(this.contactos);
   }
 
-  // Encontrar un contacto por índice
+  // Encontra un contacto por índice
   encontrar_contacto(indice: number) {
     if (indice >= 0 && indice < this.contactos.length) {
       return this.contactos[indice];
@@ -54,7 +54,7 @@ export class ServiceContactos {
     return new Contactos("", "", "", "", "", "");
   }
 
-  // Actualizar un contacto existente
+  // Actualiza un contacto existente
   actualizar_contacto(indice: number, contacto: Contactos) {
     const contactoModificado = this.contactos[indice];
     if (contactoModificado) {

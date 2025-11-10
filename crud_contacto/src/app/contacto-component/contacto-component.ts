@@ -9,9 +9,9 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './contacto-component.html',
-  styleUrls: ['./contacto-component.css']  // corregido
+  styleUrls: ['./contacto-component.css']  
 })
-export class ContactoComponent {
+export class ContactoComponent { 
   contacto: Contactos = new Contactos("", "", "", "", "", "");
 
   constructor(private router: Router, private ServiceContactos: ServiceContactos) {};

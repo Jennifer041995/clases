@@ -26,7 +26,7 @@ export class ActualizarComponent implements OnInit {
     this.contacto = this.ServiceContactos.encontrar_contacto(this.indice);
   }
 
-  actualizarContacto() {
+  actualizarContacto() { 
     if (this.accion == 1) {
       //trim es una función que se utiliza para eliminar los espacios en blanco al principio y al final de una cadena de texto
       if (this.contacto.nombre.trim() && this.contacto.apellido.trim() && this.contacto.telefono.trim()) {

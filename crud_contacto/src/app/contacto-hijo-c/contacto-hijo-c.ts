@@ -17,7 +17,7 @@ throw new Error('Method not implemented.');
   @Input() contactoLista!: Contactos;
   @Input() indice!: number;
   array_caracteristicas = [''];
-
+ 
   agregar_caracteristica(caracteristica: string){
     this.array_caracteristicas.push(caracteristica);
   }

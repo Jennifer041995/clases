@@ -100,4 +100,4 @@ export class ListaComponent implements OnInit, OnDestroy {
       this.contactosFiltrados = this.contactos;
     }
   }
-}
+} 
