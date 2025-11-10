@@ -8,22 +8,29 @@
   </div>
   <br>
   <form class="form-group row">
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-8">
       <label for="nombre"></label>
       <input type="text" name="nombre" id="nombre" placeholder="nombre" class="form-control" [(ngModel)]="cuadroNombre">
     </div>
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-8">
       <label for="apellido"></label>
       <input type="text" name="apellido" id="apellido" placeholder="apellido" class="form-control" [(ngModel)]="cuadroApellido">
     </div>
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-8">
       <label for="telefono"></label>
       <input type="text" name="telefono" id="telefono" placeholder="telefono" class="form-control" [(ngModel)]="cuadroTelefono">
     </div>
-    <div class="col">
-      <button type="submit" class="btn btn-primary" (click)="agregar_contacto()" style="margin-top: 35px;">Guardar</button>
+    <br>
+    <div class="form-group col-md-8">
+      <label for="email"></label>
+      <input type="email" name="email" id="email" placeholder="email" class="form-control" [(ngModel)]="cuadroEmail">
+    </div>
+    <div class="form-group col-md-8">
+      <label for="nota"></label>
+      <input type="text" name="nota" id="nota" placeholder="nota" class="form-control" [(ngModel)]="cuadroNota">
+    </div>
+    <div class="form-group col-md-8">
+      <button type="submit" class="btn btn-primary" (click)="agregar_contacto()" style="margin-top: 30px;">Guardar</button>
     </div>
   </form>
 </div>
-<app-contacto-hijo-c *ngFor="let contacto of contactos; let i = index" [contactoLista]="contacto" [indice]="i"></app-contacto-hijo-c>
-<br>

@@ -9,6 +9,10 @@ import { Observable, of } from "rxjs";
 })
 export class ServiceContactos {
   contactos: Contactos[] = [];
+  obtenerContacto: any;
+  actualizarContacto: any;
+  actualizar_Contacto: any;
+  obtenerContactoPorId: any;
 
   constructor(
     private dataService: DataService,
@@ -23,7 +27,7 @@ export class ServiceContactos {
     console.log(mensaje);
   }
 
-  // 🔹 Agregar contacto nuevo
+  // Agregar contacto nuevo
   agregar_contacto(contacto: Contactos) {
     this.contactos.push(contacto);
 
@@ -37,12 +41,12 @@ export class ServiceContactos {
     );
   }
 
-  // 🔹 Obtener contactos actuales
+  // Obtener contactos actuales
   obtener_contactos(): Observable<Contactos[]> {
     return of(this.contactos);
   }
 
-  // 🔹 Encontrar un contacto por índice
+  // Encontrar un contacto por índice
   encontrar_contacto(indice: number) {
     if (indice >= 0 && indice < this.contactos.length) {
       return this.contactos[indice];
@@ -50,7 +54,7 @@ export class ServiceContactos {
     return new Contactos("", "", "", "", "", "");
   }
 
-  // 🔹 Actualizar un contacto existente
+  // Actualizar un contacto existente
   actualizar_contacto(indice: number, contacto: Contactos) {
     const contactoModificado = this.contactos[indice];
     if (contactoModificado) {
@@ -62,6 +66,7 @@ export class ServiceContactos {
 
       // Guardar cambios completos en Firebase
       this.dataService.guardar_contactos(this.contactos);
+      this.dataService.actualizar_contactos(this.contactos);
 
       // Mensaje local
       this.servicioMensaje.muestra_mensaje(
@@ -71,7 +76,7 @@ export class ServiceContactos {
     }
   }
 
-  // 🔹 Eliminar un contacto
+  // Eliminar un contacto
   eliminar_contacto(indice: number) {
     if (indice >= 0 && indice < this.contactos.length) {
       this.contactos.splice(indice, 1);
@@ -87,17 +92,17 @@ export class ServiceContactos {
     }
   }
 
-  // 🔹 Cargar desde Firebase
+  // Cargar desde Firebase
   obtener_contactos_db() {
     return this.dataService.cargar_contactos();
   }
 
-  // 🔹 Establecer el array local
+  // Establecer el array local
   set_contactos(misContactos: Contactos[]) {
     this.contactos = misContactos || [];
   }
 
-  // 🔹 Inicializar datos desde la base de datos
+  // Inicializar datos desde la base de datos
   cargarDesdeDB() {
     this.obtener_contactos_db().subscribe({
       next: (res: any) => {

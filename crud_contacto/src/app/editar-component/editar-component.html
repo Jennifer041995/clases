@@ -1,6 +1,6 @@
 <div class="container mt-4">
-  <h2>Agregar Nuevo Contacto</h2>
-  <form (ngSubmit)="agregarContacto()" #contactoForm="ngForm">
+  <h2>Editar Contacto</h2>
+  <form (ngSubmit)="editarContacto()" #contactoForm="ngForm">
     <div class="mb-3">
       <label for="nombre" class="form-label">Nombre</label>
       <input type="text" class="form-control" id="nombre" [(ngModel)]="contacto.nombre" name="nombre" required>
@@ -21,7 +21,7 @@
       <label for="nota" class="form-label">Nota</label>
       <textarea class="form-control" id="nota" [(ngModel)]="contacto.nota" name="nota" rows="3"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!contactoForm.form.valid">Agregar Contacto</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!contactoForm.form.valid">Actualizar Contacto</button>
     <button type="button" class="btn btn-secondary ms-2" (click)="volverContactos()">Cancelar</button>
   </form>
 </div>
