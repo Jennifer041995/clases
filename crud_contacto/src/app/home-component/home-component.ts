@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
               contactosArray = contactosArray.filter(contacto => contacto && contacto.id);
               // Eliminar duplicados por ID
               contactosArray = contactosArray.filter((contacto, index, self) =>
-                //recurre al array y mantiene solo el primer contacto con un ID único eloimnando los duplicados
+                //recurre al array y mantiene solo el primer contacto con un ID único eliminando los duplicados
                 index === self.findIndex(c => c.id === contacto.id)
               );
               this.contactos = contactosArray;
