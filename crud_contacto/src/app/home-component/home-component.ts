@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
     this.contactosService.obtener_contactos_db().subscribe(
       (misContactos: any) => {
         if (misContactos) {
-          // Converte el objeto de Firebase en un array y filtrar contactos válidos
+          // Convierte el objeto de Firebase en un array y filtrar contactos válidos
           let contactosArray: Contactos[] = Object.values(misContactos);
           contactosArray = contactosArray.filter(contacto => contacto && contacto.id);
           // Elimina duplicados por ID

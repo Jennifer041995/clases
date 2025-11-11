@@ -24,7 +24,7 @@ export class ListaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cargarContactos();
     
-    // Recargar contactos cuando se navega a esta ruta
+    // Recarga contactos cuando se navega a esta ruta
     //pipe transfoma datos en planillas de manera decorativa, sin modificar el valor original en el componente
     this.routerSubscription = this.router.events.pipe(
       //verifica si un objeto es una instancia de una clase específica
