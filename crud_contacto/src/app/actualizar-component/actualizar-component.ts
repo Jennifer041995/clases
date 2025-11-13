@@ -12,42 +12,33 @@ import { ServiceContactos } from '../crud_contactos.service';
   styleUrl: './actualizar-component.css',
 })
 export class ActualizarComponent implements OnInit {
-  contactoId: string = "";
+  indice: number = 0;
   contacto: Contactos = new Contactos("", "", "", "", "", "");
   accion: any = 0;
 
   constructor(private route: ActivatedRoute, private router: Router, private ServiceContactos: ServiceContactos) {}
 
   ngOnInit(): void {
-    this.contactoId = this.route.snapshot.params["id"];
-    // Buscar contacto por ID
-    const contactoEncontrado = this.ServiceContactos.encontrar_contacto_por_id(this.contactoId);
-    if (contactoEncontrado) {
-      this.contacto = { ...contactoEncontrado }; // Crear una copia para no modificar el original directamente
-    }
+    // parseInt convierte una cadena de texto en un número entero
+    this.indice = parseInt(this.route.snapshot.params["indice"]);
     this.accion = parseInt(this.route.snapshot.queryParams['accion']);
+    // Cargar el contacto por índice directamente del array local
+    this.contacto = this.ServiceContactos.encontrar_contacto(this.indice);
   }
 
-  actualizarContacto() {
+  actualizarContacto() { 
     if (this.accion == 1) {
-      //trim - es una función que se utiliza para eliminar los espacios en blanco al principio y al final de una cadena de texto
-      if (this.contacto.nombre.trim() && this.contacto.apellido.trim() && this.contacto.telefono.trim() && this.validarEmail()) {
-        // Asegurar que el ID se mantenga
-        this.contacto.id = this.contactoId;
-        this.ServiceContactos.actualizar_contacto_por_id(this.contacto);
+      //trim es una función que se utiliza para eliminar los espacios en blanco al principio y al final de una cadena de texto
+      if (this.contacto.nombre.trim() && this.contacto.apellido.trim() && this.contacto.telefono.trim()) {
+        // Actualizar el contacto usando el índice
+        this.ServiceContactos.actualizar_contacto(this.indice, this.contacto);
         this.router.navigate(['/lista']);
       }
-    } else {
-      this.ServiceContactos.eliminar_contacto_por_id(this.contactoId);
+    } else if (this.accion == 2) {
+      // Eliminar el contacto usando el índice
+      this.ServiceContactos.eliminar_contacto(this.indice);
       this.router.navigate(['/lista']);
     }
-  }
-
-  validarEmail(): boolean {
-    // regex - es una secuencia de caracteres que define un patrón para buscar, validar, reemplazar o manipular texto.
-    // /^[^\s@]+@[^\s@]+\.[^\s@]+$/ es una validación que un campo de texto tenga el formato de una dirección de correo electrónico.
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return !this.contacto.email || emailRegex.test(this.contacto.email);
   }
 
   volverContactos() {

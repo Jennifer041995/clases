@@ -7,31 +7,46 @@ import { Observable, of } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-
 export class ServiceContactos {
-  constructor(private dataService: DataService, private servicioMensaje: ServicioContacto) {
-    
-  }
-
   contactos: Contactos[] = [];
-    muestra_mensaje(mensaje: string){
-        console.log(mensaje);
-    }
+  obtenerContacto: any;
+  actualizarContacto: any;
+  actualizar_Contacto: any;
+  obtenerContactoPorId: any;
 
+  constructor(
+    private dataService: DataService,
+    private servicioMensaje: ServicioContacto
+  ) {
+    // cargar contactos al iniciar el servicio
+    this.cargarDesdeDB();
+  }
+
+  // Solo muestra mensaje en consola (para depuración)
+  muestra_mensaje(mensaje: string) {
+    console.log(mensaje);
+  }
+
+  // Agregar contacto nuevo
   agregar_contacto(contacto: Contactos) {
-    const existe = this.contactos.find(c => c.id === contacto.id);
-    if (!existe) {
-      this.contactos.push(contacto);
-      this.servicioMensaje.muestra_mensaje("Contacto agregado: " + contacto.nombre + " " + contacto.apellido, 'success');
-    } else {
-      console.warn("El contacto con ID", contacto.id, "ya existe en el array local");
-    }
+    this.contactos.push(contacto);
+
+    // Guardar todos los contactos en Firebase
+    this.dataService.guardar_contactos(this.contactos);
+
+    // Mostrar mensaje local
+    this.servicioMensaje.muestra_mensaje(
+      `Contacto agregado: ${contacto.nombre} ${contacto.apellido}`,
+      "success"
+    );
   }
 
+  // Obtiene contactos actuales
   obtener_contactos(): Observable<Contactos[]> {
-    return of(this.contactos); 
+    return of(this.contactos);
   }
 
+  // Encontra un contacto por índice
   encontrar_contacto(indice: number) {
     if (indice >= 0 && indice < this.contactos.length) {
       return this.contactos[indice];
@@ -39,8 +54,9 @@ export class ServiceContactos {
     return new Contactos("", "", "", "", "", "");
   }
 
+  // Actualiza un contacto existente
   actualizar_contacto(indice: number, contacto: Contactos) {
-    let contactoModificado = this.contactos[indice];
+    const contactoModificado = this.contactos[indice];
     if (contactoModificado) {
       contactoModificado.nombre = contacto.nombre;
       contactoModificado.apellido = contacto.apellido;
@@ -48,27 +64,65 @@ export class ServiceContactos {
       contactoModificado.email = contacto.email;
       contactoModificado.nota = contacto.nota;
 
-      // Actualizar en Firebase usando el ID
-      this.servicioMensaje.muestra_mensaje("Contacto actualizado: " + contacto.nombre + " " + contacto.apellido, 'success');
+      // Guardar cambios completos en Firebase
+      this.dataService.guardar_contactos(this.contactos);
+      this.dataService.actualizar_contactos(this.contactos);
+
+      // Mensaje local
+      this.servicioMensaje.muestra_mensaje(
+        `Contacto actualizado: ${contacto.nombre} ${contacto.apellido}`,
+        "success"
+      );
     }
   }
 
+  // Eliminar un contacto
   eliminar_contacto(indice: number) {
     if (indice >= 0 && indice < this.contactos.length) {
-      const contactoEliminado = this.contactos[indice];
-      // Eliminar de Firebase usando el ID
-      if (contactoEliminado && contactoEliminado.id) {
-      }
       this.contactos.splice(indice, 1);
-      this.servicioMensaje.muestra_mensaje("Contacto eliminado correctamente", 'success');
+
+      // Guardar array actualizado en Firebase
+      this.dataService.guardar_contactos(this.contactos);
+
+      // Mensaje local
+      this.servicioMensaje.muestra_mensaje(
+        "Contacto eliminado correctamente",
+        "success"
+      );
     }
   }
 
+  // Cargar desde Firebase
   obtener_contactos_db() {
     return this.dataService.cargar_contactos();
   }
 
+  // Establecer el array local
   set_contactos(misContactos: Contactos[]) {
-    this.contactos = misContactos;
+    this.contactos = misContactos || [];
+  }
+
+  // Inicializar datos desde la base de datos
+  cargarDesdeDB() {
+    this.obtener_contactos_db().subscribe({
+      next: (res: any) => {
+        if (res) {
+          if (Array.isArray(res)) {
+            this.set_contactos(res as Contactos[]);
+          } else if (typeof res === "object") {
+            const arr: Contactos[] = Object.values(res);
+            this.set_contactos(arr);
+          } else {
+            this.set_contactos([]);
+          }
+        } else {
+          this.set_contactos([]);
+        }
+      },
+      error: (err) => {
+        console.error("Error cargando contactos desde DB:", err);
+        this.set_contactos([]);
+      },
+    });
   }
 }
