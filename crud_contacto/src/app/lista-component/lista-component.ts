@@ -85,7 +85,7 @@ export class ListaComponent implements OnInit, OnDestroy {
         this.contactos.splice(indice, 1);
         //splice elimina un elemento de un array en una posición específica
         this.contactosFiltrados.splice(indice, 1);
-      }
+      } 
     });
   }
 

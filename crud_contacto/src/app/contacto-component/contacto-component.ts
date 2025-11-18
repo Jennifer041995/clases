@@ -26,7 +26,7 @@ export class ContactoComponent {
     }
   }
 
-  volverContactos() {
+  volverContactos() { 
     this.router.navigate(['/lista']);
   }
 }

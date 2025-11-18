@@ -45,3 +45,4 @@ export class ActualizarComponent implements OnInit {
     this.router.navigate(['/lista']);
   }
 }
+ 

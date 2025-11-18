@@ -31,7 +31,7 @@ export class EditarComponent implements OnInit {
       this.router.navigate(['/lista']);
     }
   }
-
+ 
   volverContactos() {
     this.router.navigate(['/lista']);
   }
